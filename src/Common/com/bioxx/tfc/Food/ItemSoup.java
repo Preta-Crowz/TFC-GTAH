@@ -20,10 +20,10 @@ public class ItemSoup extends ItemMeal
 		return 24;
 	}
 
-	@Override
-	public boolean renderDecay() {
-		return true;
-	}
+	// @Override
+	// public boolean renderDecay() {
+	// 	return false;
+	// }
 
 	@Override
 	public boolean renderWeight() {

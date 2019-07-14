@@ -11,7 +11,7 @@ public interface IFood
 
 	int getFoodID();
 
-	float getDecayRate(ItemStack is);
+	// float getDecayRate(ItemStack is);
 
 	float getFoodMaxWeight(ItemStack is);
 
@@ -19,7 +19,7 @@ public interface IFood
 	 * @return Returns an ItemStack that will replace the current ItemStack when the food has reached maximum decay.
 	 * Normally returns null.
 	 */
-	ItemStack onDecayed(ItemStack is, World world, int i, int j, int k);
+	// ItemStack onDecayed(ItemStack is, World world, int i, int j, int k);
 	/**
 	 * @return Is this food edible as is.
 	 */
@@ -39,7 +39,7 @@ public interface IFood
 
 	int getTasteSavory(ItemStack is);
 
-	boolean renderDecay();
+	// boolean renderDecay();
 
 	boolean renderWeight();
 }

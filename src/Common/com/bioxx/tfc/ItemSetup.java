@@ -754,26 +754,26 @@ public class ItemSetup extends TFCItems {
 		//Tastes are Sweet, Sour, Salty, Bitter, Umami
 
 		//Proteins
-		porkchopRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Porkchop");
-		fishRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Fish");
-		beefRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Beef");
-		chickenRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Chicken");
+		porkchopRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Porkchop");
+		fishRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Fish");
+		beefRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Beef");
+		chickenRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Chicken");
 		soybean = new ItemFoodTFC(EnumFoodGroup.Protein, 10, 0, 0, 0, 40, true).setUnlocalizedName("Soybeans");
-		eggCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 25).setDecayRate(2.5f).setUnlocalizedName("Egg Cooked");
-		calamariRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 20, 0, 35, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setDecayRate(4.0f).setUnlocalizedName("Calamari");
-		muttonRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton");
-		venisonRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 5, 0, 0, 0, 50, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Venison");
-		horseMeatRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeat");
+		eggCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 25).setUnlocalizedName("Egg Cooked");
+		calamariRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 20, 0, 35, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Calamari");
+		muttonRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton");
+		venisonRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 5, 0, 0, 0, 50, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Venison");
+		horseMeatRaw = new ItemFoodMeat(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeat");
 
 		//Dairy
-		cheese = new ItemFoodTFC(EnumFoodGroup.Dairy, 0, 10, 20, 0, 35).setDecayRate(0.5f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Cheese");
+		cheese = new ItemFoodTFC(EnumFoodGroup.Dairy, 0, 10, 20, 0, 35).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Cheese");
 
 		//Grains
-		wheatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setDecayRate(0.5f).setUnlocalizedName("Wheat Grain");
-		barleyGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 10, 20).setDecayRate(0.5f).setUnlocalizedName("Barley Grain");
-		oatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setDecayRate(0.5f).setUnlocalizedName("Oat Grain");
-		ryeGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 15, 0, 5, 20).setDecayRate(0.5f).setUnlocalizedName("Rye Grain");
-		riceGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setDecayRate(0.5f).setUnlocalizedName("Rice Grain");
+		wheatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setUnlocalizedName("Wheat Grain");
+		barleyGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 10, 20).setUnlocalizedName("Barley Grain");
+		oatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setUnlocalizedName("Oat Grain");
+		ryeGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 15, 0, 5, 20).setUnlocalizedName("Rye Grain");
+		riceGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setUnlocalizedName("Rice Grain");
 		maizeEar = new ItemFoodTFC(EnumFoodGroup.Grain, 25, 0, 0, 5, 20, true).setUnlocalizedName("Maize Ear");
 
 		wheatWhole = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20, false, false).setFolder("food/").setUnlocalizedName("Wheat Whole");
@@ -835,36 +835,36 @@ public class ItemSetup extends TFCItems {
 		redBellPepper = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Red Bell Pepper");
 		squash = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Squash");
 		seaWeed = new ItemFoodTFC(EnumFoodGroup.Vegetable, 0, 0, 10, 10, 10, true).setUnlocalizedName("Sea Weed");
-		sugar = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, true).setDecayRate(0.01f).setUnlocalizedName("Sugar");
+		sugar = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, true).setUnlocalizedName("Sugar");
 
 		//Fruit are in the foodID range of 50,000
-		redApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 25, 5, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
-		banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
-		orange = new ItemFoodTFC(EnumFoodGroup.Fruit, 50, 30, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
-		greenApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 15, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
-		lemon = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 50, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
-		olive = new ItemFoodTFC(EnumFoodGroup.Fruit, 10, 0, 3, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
-		cherry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[6]);
-		peach = new ItemFoodTFC(EnumFoodGroup.Fruit, 25, 10, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[7]);
-		plum = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 15, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
+		redApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 25, 5, 0, 10, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
+		banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
+		orange = new ItemFoodTFC(EnumFoodGroup.Fruit, 50, 30, 0, 10, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
+		greenApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 15, 0, 10, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
+		lemon = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 50, 0, 10, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
+		olive = new ItemFoodTFC(EnumFoodGroup.Fruit, 10, 0, 3, 10, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
+		cherry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[6]);
+		peach = new ItemFoodTFC(EnumFoodGroup.Fruit, 25, 10, 0, 0, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[7]);
+		plum = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 15, 0, 0, 0, true).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
 
-		wintergreenBerry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 0, 0, 20, 0).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
-		blueberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 20, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
-		raspberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 35, 15, 0, 5, 0).setDecayRate(2.0f).setUnlocalizedName("Raspberry");
-		strawberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 5, 0).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
-		blackberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 30, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blackberry");
-		bunchberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Bunchberry");
-		cranberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 45, 0).setDecayRate(2.0f).setUnlocalizedName("Cranberry");
-		snowberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 10, 0, 0, 90, 0).setDecayRate(2.0f).setUnlocalizedName("Snowberry");
-		elderberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 10, 0).setDecayRate(2.0f).setUnlocalizedName("Elderberry");
-		gooseberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Gooseberry");
-		cloudberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 40, 0, 30, 0).setDecayRate(2.0f).setUnlocalizedName("Cloudberry");
+		wintergreenBerry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 0, 0, 20, 0).setUnlocalizedName("Wintergreen Berry");
+		blueberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 20, 0, 0, 0).setUnlocalizedName("Blueberry");
+		raspberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 35, 15, 0, 5, 0).setUnlocalizedName("Raspberry");
+		strawberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 5, 0).setUnlocalizedName("Strawberry");
+		blackberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 30, 0, 0, 0).setUnlocalizedName("Blackberry");
+		bunchberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 5, 0, 0, 0).setUnlocalizedName("Bunchberry");
+		cranberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 45, 0).setUnlocalizedName("Cranberry");
+		snowberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 10, 0, 0, 90, 0).setUnlocalizedName("Snowberry");
+		elderberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 10, 0).setUnlocalizedName("Elderberry");
+		gooseberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 0, 0).setUnlocalizedName("Gooseberry");
+		cloudberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 40, 0, 30, 0).setUnlocalizedName("Cloudberry");
 
 		sandwich = new ItemSandwich().setUnlocalizedName("Sandwich");
 		salad = new ItemSalad().setUnlocalizedName("Salad");
 		//Soup = new ItemSoup().setUnlocalizedName("Soup");
 
-		sugarcane = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, false, false).setDecayRate(0.75f).setFolder("plants/").setUnlocalizedName("Sugarcane");
+		sugarcane = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, false, false).setFolder("plants/").setUnlocalizedName("Sugarcane");
 		//Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp").setCreativeTab(null);
 
 		seedsWheat = new ItemCustomSeeds(0).setUnlocalizedName("Seeds Wheat");

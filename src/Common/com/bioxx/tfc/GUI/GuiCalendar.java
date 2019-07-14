@@ -72,8 +72,8 @@ public class GuiCalendar extends GuiScreen
 				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.guiSkills));
 		buttonList.add(new GuiInventoryButton(6, guiLeft + 176, guiTop + 47, 25, 20, 
 				0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.guiCalendar));
-		buttonList.add(new GuiInventoryButton(7, guiLeft + 176, guiTop + 66, 25, 20, 
-				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
+		// buttonList.add(new GuiInventoryButton(7, guiLeft + 176, guiTop + 66, 25, 20, 
+		// 		0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public class GuiCalendar extends GuiScreen
 				this.mc.displayGuiScreen(new GuiInventoryTFC(Minecraft.getMinecraft().thePlayer));
 			else if (guibutton.id == 5)
 				Minecraft.getMinecraft().displayGuiScreen(new GuiSkills(Minecraft.getMinecraft().thePlayer));
-			else if (guibutton.id == 7)
-				Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
+	// 		else if (guibutton.id == 7)
+	// 			Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
 	}
 }

@@ -46,9 +46,9 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 		}
 
 		if (!TFC_Core.isExposedToRain(worldObj, xCoord, yCoord, zCoord) && TFC_Time.getTotalHours() > this.lastSmokedTime + 1)
-			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord, env, base);
+			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 		else if(TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) > 0)
-			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord, env*2, base*2);
+			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 	}
 
 	@Override

@@ -69,11 +69,11 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 		return false;
 	}
 
-	@Override
-	public float getDecayRate(ItemStack is)
-	{
-		if (Food.isPickled(is))
-			return 0.3f;
-		return 0.5f;
-	}
+	// @Override
+	// public float getDecayRate(ItemStack is)
+	// {
+	// 	if (Food.isPickled(is))
+	// 		return 0.3f;
+	// 	return 0.5f;
+	// }
 }

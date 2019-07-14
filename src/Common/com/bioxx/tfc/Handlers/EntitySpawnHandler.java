@@ -47,8 +47,8 @@ public class EntitySpawnHandler
 			if(!(((EntityPlayer)event.entity).inventory instanceof InventoryPlayerTFC))
 				((EntityPlayer)event.entity).inventory = TFC_Core.getNewInventory((EntityPlayer)event.entity);
 
-			((EntityPlayer)event.entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000);
-			((EntityPlayer)event.entity).setHealth(1000);
+			((EntityPlayer)event.entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200);
+			((EntityPlayer)event.entity).setHealth(200);
 			event.entity.getEntityData().setBoolean("hasSpawned", true);
 		}
 

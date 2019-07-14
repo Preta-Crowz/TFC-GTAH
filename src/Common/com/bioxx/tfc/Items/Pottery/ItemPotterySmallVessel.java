@@ -298,7 +298,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		ItemStack[] bag = loadBagInventory(is);
 		if(bag != null)
 		{
-			TFC_Core.handleItemTicking(bag, world, x, y, z, 0.5f);
+			TFC_Core.handleItemTicking(bag, world, x, y, z);
 			for(ItemStack i : bag)
 			{
 				if(i != null && i.stackSize == 0)
@@ -410,12 +410,12 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 						{
 							if(itemstack.getItem() instanceof ItemFoodTFC)
 							{
-								float decay = Food.getDecay(itemstack);
+								// float decay = Food.getDecay(itemstack);
 								float weight = Helper.roundNumber(Food.getWeight(itemstack), 100);
 
-								String ds = " " + EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay / weight * 100, 10) + "%";
-								if (decay <= 0)
-									ds = "";
+								// String ds = " " + EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay / weight * 100, 10) + "%";
+								// if (decay <= 0)
+								String ds = "";
 
 								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemStackDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight + "oz" + ds);
 							}

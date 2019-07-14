@@ -13,9 +13,9 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class Food 
 {
-	public static final String DECAY_TAG = "foodDecay";
-	public static final String DECAY_TIMER_TAG = "decayTimer";
-	public static final String DECAY_RATE_TAG = "decayRate";
+	// public static final String DECAY_TAG = "foodDecay";
+	// public static final String DECAY_TIMER_TAG = "decayTimer";
+	// public static final String DECAY_RATE_TAG = "decayRate";
 	public static final String WEIGHT_TAG = "foodWeight";
 	public static final String PROCESSING_TAG = "Processing Tag";
 	public static final String BRINED_TAG = "Brined";
@@ -193,44 +193,43 @@ public class Food
 		return f1[0] == f2[0] && f1[1] == f2[1] && f1[2] == f2[2] && f1[3] == f2[3] && f1[4] == f2[4];
 	}
 
-	public static void setDecay(ItemStack is, float value)
-	{
-		NBTTagCompound nbt = getNBT(is);
-		nbt.setFloat(DECAY_TAG, Helper.roundNumber(value, 10000));
-		if(value > getWeight(is))
-			is.stackSize = 0;
-	}
+	// public static void setDecay(ItemStack is, float value)
+	// {
+	// 	NBTTagCompound nbt = getNBT(is);
+	// 	nbt.setFloat(DECAY_TAG, Helper.roundNumber(value, 10000));
+	// 	if(value > getWeight(is))
+	// 		is.stackSize = 0;
+	// }
 
-	public static float getDecay(ItemStack is)
-	{
-		NBTTagCompound nbt = getNBT(is);
-		if (nbt.hasKey(DECAY_TAG))
-			return nbt.getFloat(DECAY_TAG);
-		else
-			return 0.0F;
-	}
+	// public static float getDecay(ItemStack is)
+	// {
+	// 	NBTTagCompound nbt = getNBT(is);
+	// 	if (nbt.hasKey(DECAY_TAG))
+	// 		return nbt.getFloat(DECAY_TAG);
+	// 	else
+	// 		return 0.0F;
+	// }
 
-	public static void setDecayTimer(ItemStack is, int value)
-	{
-		NBTTagCompound nbt = getNBT(is);
-		nbt.setInteger(DECAY_TIMER_TAG, value);
-	}
+	// public static void setDecayTimer(ItemStack is, int value)
+	// {
+	// 	NBTTagCompound nbt = getNBT(is);
+	// 	nbt.setInteger(DECAY_TIMER_TAG, value);
+	// }
 
-	public static int getDecayTimer(ItemStack is)
-	{
-		NBTTagCompound nbt = getNBT(is);
-		if (nbt.hasKey(DECAY_TIMER_TAG))
-			return nbt.getInteger(DECAY_TIMER_TAG);
-		else
-			return (int) TFC_Time.getTotalHours();
-	}
+	// public static int getDecayTimer(ItemStack is)
+	// {
+	// 	NBTTagCompound nbt = getNBT(is);
+	// 	if (nbt.hasKey(DECAY_TIMER_TAG))
+	// 		return nbt.getInteger(DECAY_TIMER_TAG);
+	// 	else
+	// 		return (int) TFC_Time.getTotalHours();
+	// }
 
 	public static void setWeight(ItemStack is, float value)
 	{
 		NBTTagCompound nbt = getNBT(is);
 		nbt.setFloat(WEIGHT_TAG, Helper.roundNumber(value, 100));
-		if(getDecay(is) > value || value <= 0)
-			is.stackSize = 0;
+		is.stackSize = 0;
 	}
 
 	public static float getWeight(ItemStack is)
@@ -444,18 +443,18 @@ public class Food
 			return new int[] { -1, -1, -1, -1 };
 	}
 
-	public static void setDecayRate(ItemStack is, float val)
-	{
-		NBTTagCompound nbt = getNBT(is);
-		nbt.setFloat(DECAY_RATE_TAG, val);
-	}
+	// public static void setDecayRate(ItemStack is, float val)
+	// {
+	// 	NBTTagCompound nbt = getNBT(is);
+	// 	nbt.setFloat(DECAY_RATE_TAG, val);
+	// }
 
-	public static float getDecayRate(ItemStack is)
-	{
-		NBTTagCompound nbt = getNBT(is);
-		if (nbt.hasKey(DECAY_RATE_TAG))
-			return nbt.getFloat(DECAY_RATE_TAG);
-		else
-			return 1.0F;
-	}
+	// public static float getDecayRate(ItemStack is)
+	// {
+	// 	NBTTagCompound nbt = getNBT(is);
+	// 	if (nbt.hasKey(DECAY_RATE_TAG))
+	// 		return nbt.getFloat(DECAY_RATE_TAG);
+	// 	else
+	// 		return 1.0F;
+	// }
 }

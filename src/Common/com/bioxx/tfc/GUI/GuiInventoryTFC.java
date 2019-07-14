@@ -167,8 +167,8 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.guiSkills));
 		buttonList.add(new GuiInventoryButton(2, guiLeft+176, guiTop + 41, 25, 20, 
 				0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.guiCalendar));
-		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 60, 25, 20, 
-				0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
+		// buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 60, 25, 20, 
+		// 		0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
 	}
 
 	@Override
@@ -178,8 +178,8 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 			Minecraft.getMinecraft().displayGuiScreen(new GuiSkills(player));
 		else if (guibutton.id == 2)
 			Minecraft.getMinecraft().displayGuiScreen(new GuiCalendar(player));
-		else if (guibutton.id == 3)
-			Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(player));
+		// else if (guibutton.id == 3)
+		// 	Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(player));
 	}
 
 	@Override
@@ -304,12 +304,12 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 				int knifeDamage = inventorySlots.getSlot(knifeSlot).getStack().getItemDamage();
 				if(knifeDamage >= inventorySlots.getSlot(knifeSlot).getStack().getMaxDamage())
 					break;
-				if (is != null && !(is.getItem() instanceof ItemMeal) && is.getItem() instanceof IFood && Food.getDecay(is) > 0 &&
-						Food.getDecayTimer(is) >= TFC_Time.getTotalHours())
-				{
-					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
-					this.handleMouseClick(this.inventorySlots.getSlot(0), 0, 0, 1);
-				}
+				// if (is != null && !(is.getItem() instanceof ItemMeal) && is.getItem() instanceof IFood && Food.getDecay(is) > 0 &&
+				// 		Food.getDecayTimer(is) >= TFC_Time.getTotalHours())
+				// {
+				// 	this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
+				// 	this.handleMouseClick(this.inventorySlots.getSlot(0), 0, 0, 1);
+				// }
 			}
 			return true;
 		}

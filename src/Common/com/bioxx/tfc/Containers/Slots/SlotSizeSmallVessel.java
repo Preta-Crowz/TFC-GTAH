@@ -40,7 +40,7 @@ public class SlotSizeSmallVessel extends Slot
 
 		if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize &&
 				(itemstack.getItem() instanceof IFood || itemstack.getItem() instanceof IItemFoodBlock) &&
-				!(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey(Food.WEIGHT_TAG) && itemstack.getTagCompound().hasKey(Food.DECAY_TAG)))
+				!(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey(Food.WEIGHT_TAG)))
 				return false;
 
 		boolean except = exceptions.contains(itemstack.getItem());

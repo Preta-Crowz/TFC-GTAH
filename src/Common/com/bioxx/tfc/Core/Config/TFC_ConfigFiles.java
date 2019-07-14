@@ -41,7 +41,7 @@ public class TFC_ConfigFiles
 	// General
 	public static final String GENERAL = "general";
 	public static final String TIME = "time";
-	public static final String FOOD_DECAY = "food decay";
+	// public static final String FOOD_DECAY = "food decay";
 	public static final String CAVEIN_OPTIONS = "cave-ins";
 	public static final String WORLD_GEN = "world generation";
 	public static final String CROPS = "crops";
@@ -383,12 +383,12 @@ public class TFC_ConfigFiles
 		oilLampFuelMult = generalConfig.getInt("oilLampFuelMult", TIME, oilLampFuelMult, 1, 50, "This determines how much fuel is used over time from oil lamps. Setting this higher will make fuel last longer. A mult of 1 = 250 hours, 4 = 1000 hours, 8 = 2000 hours.", "config.gui.TFCConfig.time.oilLampFuelMult");
 		animalTimeMultiplier = generalConfig.getFloat("animalTimeMultiplier", TIME, animalTimeMultiplier, 0.01f, 100.0f, "This is a global multiplier for the gestation period of animals, as well as how long it takes for them to reach adulthood. Decrease for faster times.", "config.gui.TFCConfig.time.animalTimeMultiplier");
 
-		generalConfig.setCategoryLanguageKey(FOOD_DECAY, "config.gui.TFCConfig.fooddecay");
+		// generalConfig.setCategoryLanguageKey(FOOD_DECAY, "config.gui.TFCConfig.fooddecay");
 
-		foodDecayRate = generalConfig.getFloat("foodDecayRate", FOOD_DECAY, foodDecayRate, 1.0f, 2.0f, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5", "config.gui.TFCConfig.fooddecay.foodDecayRate");
-		useDecayProtection = generalConfig.getBoolean("useDecayProtection", FOOD_DECAY, useDecayProtection, "Set this to false if you want food to auto decay when a chunk is loaded instead of limiting decay when a chunk has been unloaded for a long period.", "config.gui.TFCConfig.fooddecay.useDecayProtection");
-		decayProtectionDays = generalConfig.getInt("decayProtectionDays", FOOD_DECAY, decayProtectionDays, 1, 12000, "If a food item has not been ticked for >= this number of days than when it is ticked for the first time, only a small amount of decay will occur.", "config.gui.TFCConfig.fooddecay.decayProtectionDays");
-		decayMultiplier = generalConfig.getFloat("foodDecayMultiplier", FOOD_DECAY, decayMultiplier, 0.0f, 100.0f, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.", "config.gui.TFCConfig.fooddecay.foodDecayMultiplier");
+		// foodDecayRate = generalConfig.getFloat("foodDecayRate", FOOD_DECAY, foodDecayRate, 1.0f, 2.0f, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5", "config.gui.TFCConfig.fooddecay.foodDecayRate");
+		// useDecayProtection = generalConfig.getBoolean("useDecayProtection", FOOD_DECAY, useDecayProtection, "Set this to false if you want food to auto decay when a chunk is loaded instead of limiting decay when a chunk has been unloaded for a long period.", "config.gui.TFCConfig.fooddecay.useDecayProtection");
+		// decayProtectionDays = generalConfig.getInt("decayProtectionDays", FOOD_DECAY, decayProtectionDays, 1, 12000, "If a food item has not been ticked for >= this number of days than when it is ticked for the first time, only a small amount of decay will occur.", "config.gui.TFCConfig.fooddecay.decayProtectionDays");
+		// decayMultiplier = generalConfig.getFloat("foodDecayMultiplier", FOOD_DECAY, decayMultiplier, 0.0f, 100.0f, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.", "config.gui.TFCConfig.fooddecay.foodDecayMultiplier");
 
 		generalConfig.setCategoryLanguageKey(CAVEIN_OPTIONS, "config.gui.TFCConfig.caveins");
 
@@ -461,7 +461,7 @@ public class TFC_ConfigFiles
 		getColor(generalConfig, ANVIL_RULE_COLOR2, anvilRuleColor2, "config.gui.TFCConfig.colors.anvil.2");
 
 		//noinspection deprecation
-		Global.foodDecayRate = foodDecayRate; // keep deprecated value up to date
+		// Global.foodDecayRate = foodDecayRate; // keep deprecated value up to date
 
 		if (generalConfig.hasChanged()) generalConfig.save();
 	}

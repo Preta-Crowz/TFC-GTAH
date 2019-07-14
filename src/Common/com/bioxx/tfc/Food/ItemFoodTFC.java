@@ -54,7 +54,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	private EnumFoodGroup foodgroup;
 
 	public int foodID;
-	public float decayRate = 1.0f;
+	// public float decayRate = 1.0f;
 	public boolean edible = true;
 	public boolean canBeUsedRaw = true;
 	protected int tasteSweet;
@@ -98,11 +98,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		canBeUsedRaw = usable;
 	}
 
-	public ItemFoodTFC setDecayRate(float f)
-	{
-		this.decayRate = f;
-		return this;
-	}
+	// public ItemFoodTFC setDecayRate(float f)
+	// {
+	// 	this.decayRate = f;
+	// 	return this;
+	// }
 
 	public ItemFoodTFC setCanSmoke()
 	{
@@ -165,29 +165,29 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		return rbg;
 	}*/
 
-	@Override
-	public float getDecayRate(ItemStack is)
-	{
-		float mult = 1.0f;
-		if(Food.isCooked(is))
-		{
-			mult *= 0.75f;
-			if(Food.isPickled(is) || Food.isSalted(is))
-				mult *= 0.75f;
-			if(Food.isSmoked(is))
-				mult *= 1f - (0.25f * this.getSmokeAbsorbMultiplier());
-		}
-		else
-		{
-			if(Food.isPickled(is) || Food.isSalted(is))
-				mult *= 0.5f;
-			if(Food.isSmoked(is))
-				mult *= 1f - (0.25f * this.getSmokeAbsorbMultiplier());
-			if(Food.isDried(is))
-				mult *= 0.25f;
-		}
-		return decayRate * (TFC_Time.getYearRatio(96)) * mult;
-	}
+	// @Override
+	// public float getDecayRate(ItemStack is)
+	// {
+	// 	float mult = 1.0f;
+	// 	if(Food.isCooked(is))
+	// 	{
+	// 		mult *= 0.75f;
+	// 		if(Food.isPickled(is) || Food.isSalted(is))
+	// 			mult *= 0.75f;
+	// 		if(Food.isSmoked(is))
+	// 			mult *= 1f - (0.25f * this.getSmokeAbsorbMultiplier());
+	// 	}
+	// 	else
+	// 	{
+	// 		if(Food.isPickled(is) || Food.isSalted(is))
+	// 			mult *= 0.5f;
+	// 		if(Food.isSmoked(is))
+	// 			mult *= 1f - (0.25f * this.getSmokeAbsorbMultiplier());
+	// 		if(Food.isDried(is))
+	// 			mult *= 0.25f;
+	// 	}
+	// 	return decayRate * (TFC_Time.getYearRatio(96)) * mult;
+	// }
 
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
@@ -277,14 +277,14 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if (ounces > 0 && ounces <= Global.FOOD_MAX_WEIGHT)
 			arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 
-		float decay = Food.getDecay(is);
-		if (decay > 0)
-			arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
-		if (TFCOptions.enableDebugMode)
-		{
-			arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + ": " + decay);
-			arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + Helper.roundNumber(this.getDecayRate(is), 100));
-		}
+		// float decay = Food.getDecay(is);
+		// if (decay > 0)
+		// 	arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
+		// if (TFCOptions.enableDebugMode)
+		// {
+		// 	arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + ": " + decay);
+		// 	arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + Helper.roundNumber(this.getDecayRate(is), 100));
+		// }
 
 		if (TFC_Core.showCtrlInformation())
 			ItemFoodTFC.addTasteInformation(is, player, arraylist);
@@ -446,11 +446,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		{
 			if(is.hasTagCompound())
 			{
-				//NBTTagCompound nbt = is.getTagCompound();
+				NBTTagCompound nbt = is.getTagCompound();
 				float weight = Food.getWeight(is);
-				float decay = Math.max(Food.getDecay(is), 0);
+				// float decay = Math.max(Food.getDecay(is), 0);
 
-				float eatAmount = Math.min(weight - decay, 5f);
+				float eatAmount = Math.min(weight, 5f);
 				float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
 				if(stomachDiff > 0)
 					eatAmount-=stomachDiff;
@@ -484,8 +484,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			if(!world.isRemote)
 			{
 				float weight = Food.getWeight(is);
-				float decay = Math.max(Food.getDecay(is), 0);
-				float eatAmount = Math.min(weight - decay, 5f);
+				// float decay = Math.max(Food.getDecay(is), 0);
+				float eatAmount = Math.min(weight, 5f);
 				if(FoodStatsTFC.reduceFood(is, eatAmount))
 					is.stackSize = 0;
 			}
@@ -510,8 +510,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			is.setTagCompound(new NBTTagCompound());
 
 		Food.setWeight(is, weight);
-		Food.setDecay(is, -24);
-		Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() + 1);
+		// Food.setDecay(is, -24);
+		// Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() + 1);
 
 		return is;
 	}
@@ -519,7 +519,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public static ItemStack createTag(ItemStack is, float weight, float decay)
 	{
 		is = ItemFoodTFC.createTag(is, weight);
-		Food.setDecay(is, decay);
+		// Food.setDecay(is, decay);
 		return is;
 	}
 
@@ -538,11 +538,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public int getDisplayDamage(ItemStack is)
 	{
-		float decay = Food.getDecay(is);
-		float weight = Food.getWeight(is);
-		int percent = (int) ((decay / weight) * 100);
-		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
-		return percent;
+		// float decay = Food.getDecay(is);
+		return 100;
+		// float weight = Food.getWeight(is);
+		// int percent = (int) ((100 / weight) * 100);
+		// percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
+		// return percent;
 	}
 
 	@Override
@@ -603,11 +604,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		return foodID;
 	}
 
-	@Override
-	public ItemStack onDecayed(ItemStack is, World world, int x, int y, int z)
-	{
-		return null;
-	}
+	// @Override
+	// public ItemStack onDecayed(ItemStack is, World world, int x, int y, int z)
+	// {
+	// 	return null;
+	// }
 
 	@Override
 	public boolean isEdible(ItemStack is)
@@ -700,10 +701,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		return 160;
 	}
 
-	@Override
-	public boolean renderDecay() {
-		return true;
-	}
+	// @Override
+	// public boolean renderDecay() {
+	// 	return false; // Decay is disabled
+	// }
 
 	@Override
 	public boolean renderWeight() {

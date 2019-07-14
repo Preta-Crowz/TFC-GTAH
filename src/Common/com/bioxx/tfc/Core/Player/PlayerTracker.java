@@ -35,6 +35,7 @@ public class PlayerTracker
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.PACKET_PIPELINE.sendTo(pkt, (EntityPlayerMP) event.player);
 		TerraFirmaCraft.PACKET_PIPELINE.sendTo(new ConfigSyncPacket(), (EntityPlayerMP) event.player);
+		// if(event.player.getHealth() < 200) event.player.setHealth(200f);
 
 		//		TerraFirmaCraft.log.info("-----------------------------Sending TestPacket");
 		//AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
@@ -63,8 +64,8 @@ public class PlayerTracker
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(event.player);
 		foodstats.setFoodLevel(foodLevel);
 		TFC_Core.setPlayerFoodStats(event.player, foodstats);
-		event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000);
-		event.player.setHealth(1000f * (0.25f + (event.player.worldObj.rand.nextFloat() * 0.25f)));
+		if(event.player.getMaxHealth() < 200) event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200);
+		if(event.player.getHealth() < 200) event.player.setHealth(200f);
 
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(event.player);
 		if( pi.tempSkills != null)

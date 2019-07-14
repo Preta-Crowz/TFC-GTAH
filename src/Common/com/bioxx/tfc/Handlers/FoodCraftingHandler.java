@@ -77,9 +77,9 @@ public class FoodCraftingHandler
 						continue;
 
 					float grainWeight = Food.getWeight(inputStack);
-					float grainDecay = Food.getDecay(inputStack);
-					if (grainDecay >= 0) // Account for -24.0 decay on fresh food
-						grainWeight -= grainDecay;
+					// float grainDecay = Food.getDecay(inputStack);
+					// if (grainDecay >= 0) // Account for -24.0 decay on fresh food
+					// 	grainWeight -= grainDecay;
 					grainWeight -= Math.min(grainWeight, 80);
 
 					inputStack = ItemFoodTFC.createTag(inputStack, grainWeight, 0);
@@ -108,7 +108,7 @@ public class FoodCraftingHandler
 	private static ItemStack processFoodInput(EntityPlayer player, ItemStack craftResult, IInventory craftingInv)
 	{
 		float finalWeight = 0;
-		float finalDecay = 0;
+		// float finalDecay = 0;
 		int[] fuelTasteProfile = new int[] {0,0,0,0,0};
 		int[] cookedTasteProfile = new int[] {0,0,0,0,0};
 		float cookedTime = 0;
@@ -133,8 +133,8 @@ public class FoodCraftingHandler
 
 				float inputWeight = Food.getWeight(is);
 				final float oldInputWeight = inputWeight;
-				float inputDecayPercent = Food.getDecay(is) / oldInputWeight;
-				float inputDecay = Food.getDecay(is);
+				// float inputDecayPercent = Food.getDecay(is) / oldInputWeight;
+				// float inputDecay = Food.getDecay(is);
 				float weightChange = 0;
 
 				// If the smoked or cooked profile is not the same than we can't combine
@@ -150,37 +150,37 @@ public class FoodCraftingHandler
 				}
 
 				// Only add the decay if food was actually added to the bundle
-				if(inputWeight != oldInputWeight)
-				{
-					if (inputWeight == 0) // The input is being completely combined
-					{
-						if (finalDecay < 0) // Still within the 24 hour grace period
-						{
-							if (inputDecay > finalDecay) // The input has more decay than the output
-								finalDecay = inputDecay; // Set the output's decay to the input's decay
-						}
-						else
-							finalDecay += inputDecay; // Add the decay from the input to the output
-					}
-					else
-					{
-						float decayChange = weightChange * inputDecayPercent;
-						inputDecay -= decayChange; // Remove the decay from the input
-						if (finalDecay < 0) // Still within the 24 hour grace period
-						{
-							if (decayChange > finalDecay) // The input is losing more decay than what the output currently has
-								finalDecay = decayChange; // Set the output's decay to the amount removed from the input
-						}
-						else
-							finalDecay += decayChange; // Add the decay to the output
-					}
-					foodCount++;
-				}
+				// if(inputWeight != oldInputWeight)
+				// {
+				// 	if (inputWeight == 0) // The input is being completely combined
+				// 	{
+				// 		if (finalDecay < 0) // Still within the 24 hour grace period
+				// 		{
+				// 			if (inputDecay > finalDecay) // The input has more decay than the output
+				// 				finalDecay = inputDecay; // Set the output's decay to the input's decay
+				// 		}
+				// 		else
+				// 			finalDecay += inputDecay; // Add the decay from the input to the output
+				// 	}
+				// 	else
+				// 	{
+				// 		float decayChange = weightChange * inputDecayPercent;
+				// 		inputDecay -= decayChange; // Remove the decay from the input
+				// 		if (finalDecay < 0) // Still within the 24 hour grace period
+				// 		{
+				// 			if (decayChange > finalDecay) // The input is losing more decay than what the output currently has
+				// 				finalDecay = decayChange; // Set the output's decay to the amount removed from the input
+				// 		}
+				// 		else
+				// 			finalDecay += decayChange; // Add the decay to the output
+				// 	}
+				//	foodCount++;
+				// }
 
 				if (inputWeight > 0) // If we're leaving a piece of food in the crafting grid
 				{
 					Food.setWeight(is, inputWeight);
-					Food.setDecay(is, inputDecay);
+					// Food.setDecay(is, inputDecay);
 					is.stackSize++;
 					if(is.stackSize > 2)
 						is.stackSize = 2;
@@ -191,28 +191,28 @@ public class FoodCraftingHandler
 		if(craftResult.stackSize == 0)
 			craftResult.stackSize = 1;
 
-		if (itemCount == 1) // Trimming decay with a knife from the inventory, not the crafting grid.
+		if (itemCount != 1) // Trimming decay with a knife from the inventory, not the crafting grid.
 		{
-			if (finalDecay > 0)
-			{
-				for(int i = 0; i < player.inventory.getSizeInventory(); i++)
-				{
-					ItemStack stack = player.inventory.getStackInSlot(i);
+		// 	if (finalDecay > 0)
+		// 	{
+		// 		for(int i = 0; i < player.inventory.getSizeInventory(); i++)
+		// 		{
+		// 			ItemStack stack = player.inventory.getStackInSlot(i);
 
-					if (stack != null && stack.getItem() instanceof ItemKnife)
-					{
-						// Damage the Knife
-						stack.damageItem(1, player);
-						if (stack.getItemDamage() >= stack.getMaxDamage())
-							player.inventory.setInventorySlotContents(i, null);
-						// No need to increase the stack size since the knife isn't in the crafting grid
-						break; // Break so we only damage the first knife we come across
-					}
-				}
-			}
-		}
-		else
-		{
+		// 			if (stack != null && stack.getItem() instanceof ItemKnife)
+		// 			{
+		// 				// Damage the Knife
+		// 				stack.damageItem(1, player);
+		// 				if (stack.getItemDamage() >= stack.getMaxDamage())
+		// 					player.inventory.setInventorySlotContents(i, null);
+		// 				// No need to increase the stack size since the knife isn't in the crafting grid
+		// 				break; // Break so we only damage the first knife we come across
+		// 			}
+		// 		}
+		// 	}
+		// }
+		// else
+		// {
 			// Check if we are doing anything other than combining the food
 			for(int i = 0; i < craftingInv.getSizeInventory(); i++)
 			{
@@ -234,28 +234,25 @@ public class FoodCraftingHandler
 
 				if (itemstack.getItem() instanceof ItemKnife && (!fullInv || !FoodCraftingHandler.preCrafted))
 				{
-					if (finalDecay > 0) // Trimming Decay
+					// if (finalDecay > 0) // Trimming Decay
+					// {
+					// 	FoodCraftingHandler.damageItem(player, craftingInv, i, itemstack.getItem());
+					// }
+					if (finalWeight / 2f < 1) // Food is too small to split
+					{
+						// Increase the knife's stack size so it will remain in the grid when crafting completes
+						itemstack.stackSize++;
+						if (itemstack.stackSize > 2)
+							itemstack.stackSize = 2;
+					}
+					else
 					{
 						FoodCraftingHandler.damageItem(player, craftingInv, i, itemstack.getItem());
-					}
-					else if (finalDecay <= 0) // Splitting food in half
-					{
-						if (finalWeight / 2f < 1) // Food is too small to split
-						{
-							// Increase the knife's stack size so it will remain in the grid when crafting completes
-							itemstack.stackSize++;
-							if (itemstack.stackSize > 2)
-								itemstack.stackSize = 2;
-						}
-						else
-						{
-							FoodCraftingHandler.damageItem(player, craftingInv, i, itemstack.getItem());
-							Food.setWeight(craftingInv.getStackInSlot(foodSlot), Helper.roundNumber(finalWeight / 2f, 100));
-							// Increase the food's stack size so it will remain in the grid when crafting completes
-							craftingInv.getStackInSlot(foodSlot).stackSize++;
-							if (craftingInv.getStackInSlot(foodSlot).stackSize > 2)
-								craftingInv.getStackInSlot(foodSlot).stackSize = 2;
-						}
+						Food.setWeight(craftingInv.getStackInSlot(foodSlot), Helper.roundNumber(finalWeight / 2f, 100));
+						// Increase the food's stack size so it will remain in the grid when crafting completes
+						craftingInv.getStackInSlot(foodSlot).stackSize++;
+						if (craftingInv.getStackInSlot(foodSlot).stackSize > 2)
+							craftingInv.getStackInSlot(foodSlot).stackSize = 2;
 					}
 				}
 			}
@@ -270,7 +267,7 @@ public class FoodCraftingHandler
 	public static void updateOutput(EntityPlayer player, ItemStack craftResult, IInventory craftingInv)
 	{
 		float finalWeight = 0;
-		float finalDecay = 0;
+		// float finalDecay = 0;
 		int sweetMod = -1;
 		int sourMod = -1;
 		int saltyMod = -1;
@@ -330,8 +327,8 @@ public class FoodCraftingHandler
 
 				float inputWeight = Food.getWeight(is);
 				final float oldInputWeight = inputWeight;
-				float inputDecayPercent = Food.getDecay(is) / oldInputWeight;
-				float inputDecay = Food.getDecay(is);
+				// float inputDecayPercent = Food.getDecay(is) / oldInputWeight;
+				// float inputDecay = Food.getDecay(is);
 				float weightChange = 0;
 
 				salted = salted && Food.isSalted(is);
@@ -352,53 +349,53 @@ public class FoodCraftingHandler
 				}
 
 				// Only add the decay if food was actually added to the bundle
-				if (inputWeight != oldInputWeight)
-				{
-					if (inputWeight == 0) // The input is being completely combined
-					{
-						if (finalDecay < 0) // Still within the 24 hour grace period
-						{
-							if (inputDecay > finalDecay) // The input has more decay than the output
-								finalDecay = inputDecay; // Set the output's decay to the input's decay
-						}
-						else
-							finalDecay += inputDecay; // Add the decay from the input to the output
-					}
-					else
-					{
-						float decayChange = weightChange * inputDecayPercent;
-						inputDecay -= decayChange; // Remove the decay from the input
-						if (finalDecay < 0) // Still within the 24 hour grace period
-						{
-							if (decayChange > finalDecay) // The input is losing more decay than what the output currently has
-								finalDecay = decayChange; // Set the output's decay to the amount removed from the input
-						}
-						else
-							finalDecay += decayChange; // Add the decay to the output
-					}
-					foodCount++ ;
-				}
+				// if (inputWeight != oldInputWeight)
+				// {
+				// 	if (inputWeight == 0) // The input is being completely combined
+				// 	{
+				// 		if (finalDecay < 0) // Still within the 24 hour grace period
+				// 		{
+				// 			if (inputDecay > finalDecay) // The input has more decay than the output
+				// 				finalDecay = inputDecay; // Set the output's decay to the input's decay
+				// 		}
+				// 		else
+				// 			finalDecay += inputDecay; // Add the decay from the input to the output
+				// 	}
+				// 	else
+				// 	{
+				// 		float decayChange = weightChange * inputDecayPercent;
+				// 		inputDecay -= decayChange; // Remove the decay from the input
+				// 		if (finalDecay < 0) // Still within the 24 hour grace period
+				// 		{
+				// 			if (decayChange > finalDecay) // The input is losing more decay than what the output currently has
+				// 				finalDecay = decayChange; // Set the output's decay to the amount removed from the input
+				// 		}
+				// 		else
+				// 			finalDecay += decayChange; // Add the decay to the output
+				// 	}
+				// 	foodCount++ ;
+				// }
 			}
 		}
 
-		if (itemCount == 1) // Trimming decay with a knife from the inventory, not the crafting grid.
-		{
-			if (finalDecay > 0)
-			{
-				for (int i = 0; i < player.inventory.getSizeInventory(); i++ )
-				{
-					if (player.inventory.getStackInSlot(i) == null)
-						continue;
-					if (player.inventory.getStackInSlot(i).getItem() instanceof ItemKnife)
-					{
-						finalWeight -= finalDecay;
-						finalDecay = 0;
-						break;
-					}
-				}
-			}
-		}
-		else
+		if (itemCount != 1) // Trimming decay with a knife from the inventory, not the crafting grid.
+		// {
+		// 	if (finalDecay > 0)
+		// 	{
+		// 		for (int i = 0; i < player.inventory.getSizeInventory(); i++ )
+		// 		{
+		// 			if (player.inventory.getStackInSlot(i) == null)
+		// 				continue;
+		// 			if (player.inventory.getStackInSlot(i).getItem() instanceof ItemKnife)
+		// 			{
+		// 				finalWeight -= finalDecay;
+		// 				finalDecay = 0;
+		// 				break;
+		// 			}
+		// 		}
+		// 	}
+		// }
+		// else
 		{
 			// Check if we are doing anything other than combining the food
 			for (int i = 0; i < craftingInv.getSizeInventory(); i++ )
@@ -414,33 +411,33 @@ public class FoodCraftingHandler
 				}
 				else if (inputStack.getItem() instanceof ItemKnife)
 				{
-					if (finalDecay > 0) // Trimming Decay
+					// if (finalDecay > 0) // Trimming Decay
+					// {
+					// 	finalWeight -= finalDecay;
+					// 	finalDecay = 0;
+					// }
+					// else if (finalDecay <= 0) // Splitting food in half
+					// {
+					if (!refiningGrain(craftResult, craftingInv) && finalWeight / 2f >= 1) // Must be big enough to split
 					{
-						finalWeight -= finalDecay;
-						finalDecay = 0;
+						finalWeight /= 2f;
 					}
-					else if (finalDecay <= 0) // Splitting food in half
-					{
-						if (!refiningGrain(craftResult, craftingInv) && finalWeight / 2f >= 1) // Must be big enough to split
-						{
-							finalWeight /= 2f;
-						}
-					}
+					// }
 				}
 				else if (makingDough(craftResult, craftingInv) && inputStack.getItem() instanceof IFood)
 				{
 					float grainWeight = Food.getWeight(inputStack);
-					float grainDecay = Food.getDecay(inputStack);
-					if (grainDecay >= 0) // Account for -24.0 decay on fresh food
-						grainWeight -= grainDecay;
+					// float grainDecay = Food.getDecay(inputStack);
+					// if (grainDecay >= 0) // Account for -24.0 decay on fresh food
+					// 	grainWeight -= grainDecay;
 					float doughWeight = Math.min(grainWeight, 80) * 2;
 					finalWeight = doughWeight;
-					finalDecay = 0;
+					// finalDecay = 0;
 				}
 			}
 		}
 
-		craftResult = ItemFoodTFC.createTag(craftResult, Helper.roundNumber(finalWeight, 100), Helper.roundNumber(finalDecay, 100));
+		craftResult = ItemFoodTFC.createTag(craftResult, Helper.roundNumber(finalWeight, 100));
 		if (sweetMod != 0)
 			Food.setSweetMod(craftResult, sweetMod);
 		if (sourMod != 0)
@@ -553,9 +550,9 @@ public class FoodCraftingHandler
 					continue;
 
 				float grainWeight = Food.getWeight(inputStack);
-				float grainDecay = Food.getDecay(inputStack);
-				if (grainDecay >= 0) // Account for -24.0 decay on fresh food
-					grainWeight -= grainDecay;
+				// float grainDecay = Food.getDecay(inputStack);
+				// if (grainDecay >= 0) // Account for -24.0 decay on fresh food
+				// 	grainWeight -= grainDecay;
 				float doughWeight = Math.min(grainWeight, 80);
 				grainWeight -= doughWeight;
 

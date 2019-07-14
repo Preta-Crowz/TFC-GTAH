@@ -27,9 +27,9 @@ public class FoodStatsTFC
 	private boolean updateStats = !TFCOptions.enableDebugMode; // Replace with true to allow stat depleting with debug mode enabled
 
 	/** The player's food level. This measures how much food the player can handle.*/
-	public float stomachLevel = 24;
-	private float stomachMax = 24.0f;
-	private float prevFoodLevel = 24;
+	public float stomachLevel = 20;
+	private float stomachMax = 20.0f;
+	private float prevFoodLevel = 20;
 
 	private ResourceLocation drunkBlur = new ResourceLocation("shaders/post/blur.json");
 	private ResourceLocation wastedBlur = new ResourceLocation("shaders/post/blur.json");//new ResourceLocation("shaders/post/blurPhosphor.json");
@@ -127,21 +127,21 @@ public class FoodStatsTFC
 					satisfaction = 0;
 					foodExhaustionLevel = 0;
 				}
-				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
+				// this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
 
 				if(satisfaction == 0)
 				{
 					satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
 				}
 
-				if (this.stomachLevel <= 0)
-				{
-					reduceNutrition(0.0024F);//3x penalty for starving
-				}
-				else if(this.satisfaction <= 0)
-				{
-					reduceNutrition(0.0008F);
-				}
+				// if (this.stomachLevel <= 0)
+				// {
+				// 	reduceNutrition(0.0024F);//3x penalty for starving
+				// }
+				// else if(this.satisfaction <= 0)
+				// {
+				// 	reduceNutrition(0.0008F);
+				// }
 				else
 				{
 					if(this.satProtein)
@@ -159,22 +159,22 @@ public class FoodStatsTFC
 			}
 
 			//Heal or hurt the player based on hunger.
-			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.HOUR_LENGTH/2)
-			{
-				this.foodHealTimer += TFC_Time.HOUR_LENGTH/2;
+			// if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.HOUR_LENGTH/2)
+			// {
+			// 	this.foodHealTimer += TFC_Time.HOUR_LENGTH/2;
 
-				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
-				{
-					//Player heals 1% per 30 in game minutes
-					player.heal((int) (player.getMaxHealth() * 0.01f));
-				}
-				/*else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player) && player.getSleepTimer() == 0)
-				{
-					//Players loses health at a rate of 5% per 30 minutes if they are starving
-					//Disabled so that the penalty for not eating is now entirely based upon nutrition.
-					//player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
-				}*/
-			}
+			// 	if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
+			// 	{
+			// 		//Player heals 1% per 30 in game minutes
+			// 		player.heal((int) (player.getMaxHealth() * 0.01f));
+			// 	}
+			// 	else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player) && player.getSleepTimer() == 0)
+			// 	{
+			// 		//Players loses health at a rate of 5% per 30 minutes if they are starving
+			// 		//Disabled so that the penalty for not eating is now entirely based upon nutrition.
+			// 		//player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
+			// 	}
+			// }
 
 			if (!player.capabilities.isCreativeMode && updateStats)
 			{
@@ -421,8 +421,9 @@ public class FoodStatsTFC
 
 	public static int getMaxHealth(EntityPlayer player)
 	{
-		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.healthGainRate),
-				TFCOptions.healthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
+		return (int)player.getMaxHealth();
+		// return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.healthGainRate),
+		// 		TFCOptions.healthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
 	}
 
 	/**
@@ -434,15 +435,15 @@ public class FoodStatsTFC
 		if(is.hasTagCompound())
 		{
 			float weight = Food.getWeight(is);
-			float decay = Food.getDecay(is);
-			if(decay >= 0 && (weight - decay) - amount <= 0)
-				return true;
-			else if(decay <= 0 && weight - amount <= 0)
-				return true;
-			else
-			{
-				Food.setWeight(is, weight - amount);
-			}
+			// float decay = Food.getDecay(is);
+			// if(decay >= 0 && (weight - decay) - amount <= 0)
+			// 	return true;
+			// else if(decay <= 0 && weight - amount <= 0)
+			// 	return true;
+			// else
+			// {
+			Food.setWeight(is, weight - amount);
+			// }
 		}
 		return false;
 	}

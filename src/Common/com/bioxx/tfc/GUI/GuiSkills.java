@@ -84,14 +84,14 @@ public class GuiSkills extends GuiContainerTFC
 			Minecraft.getMinecraft().displayGuiScreen(new GuiInventoryTFC(Minecraft.getMinecraft().thePlayer));
 		else if (guibutton.id == 2)
 			Minecraft.getMinecraft().displayGuiScreen(new GuiCalendar(Minecraft.getMinecraft().thePlayer));
+		// else if (guibutton.id == 3)
+		// 	Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
 		else if (guibutton.id == 3)
-			Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
-		else if (guibutton.id == 4)
 		{
 			if (skillsPage > 0)
 				skillsPage--;
 		}
-		else if (guibutton.id == 5)
+		else if (guibutton.id == 4)
 		{
 			if (9 + (skillsPage * SKILLS_PER_PAGE) < SkillsManager.instance.getSkillsArray().size())
 				skillsPage++;
@@ -103,14 +103,14 @@ public class GuiSkills extends GuiContainerTFC
 	{
 		super.updateScreen();
 		if (skillsPage == 0)
-			((GuiButton) buttonList.get(4)).enabled = false;
+			((GuiButton) buttonList.get(3)).enabled = false;
 		else
-			((GuiButton) buttonList.get(4)).enabled = true;
+			((GuiButton) buttonList.get(3)).enabled = true;
 
 		if (9 + (skillsPage * SKILLS_PER_PAGE) < SkillsManager.instance.getSkillsArray().size())
-			((GuiButton) buttonList.get(5)).enabled = true;
+			((GuiButton) buttonList.get(4)).enabled = true;
 		else
-			((GuiButton) buttonList.get(5)).enabled = false;
+			((GuiButton) buttonList.get(4)).enabled = false;
 	}
 
 	public void createButtons()
@@ -121,9 +121,9 @@ public class GuiSkills extends GuiContainerTFC
 		buttonList.add(new GuiInventoryButton(0, guiLeft + 176, guiTop, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Inventory"), TFC_Textures.guiInventory));
 		buttonList.add(new GuiInventoryButton(1, guiLeft + 176, guiTop + 19, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Skills"), TFC_Textures.guiSkills));
 		buttonList.add(new GuiInventoryButton(2, guiLeft + 176, guiTop + 38, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Calendar.Calendar"), TFC_Textures.guiCalendar));
-		buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 57, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
-		buttonList.add(new GuiButtonPage(4, guiLeft + 4, guiTop + 144, 30, 15, 0, 177));
-		buttonList.add(new GuiButtonPage(5, guiLeft + 142, guiTop + 144, 30, 15, 0, 192));
+		// buttonList.add(new GuiInventoryButton(3, guiLeft + 176, guiTop + 57, 25, 20, 0, 86, 25, 20, TFC_Core.translate("gui.Inventory.Health"), TFC_Textures.guiHealth));
+		buttonList.add(new GuiButtonPage(3, guiLeft + 4, guiTop + 144, 30, 15, 0, 177));
+		buttonList.add(new GuiButtonPage(4, guiLeft + 142, guiTop + 144, 30, 15, 0, 192));
 	}
 
 	public class GuiButtonPage extends GuiButton

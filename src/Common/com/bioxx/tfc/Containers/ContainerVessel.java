@@ -93,11 +93,12 @@ public class ContainerVessel extends ContainerTFC
 		for(int i = 0; i < containerInv.getSizeInventory(); i++)
 		{
 			ItemStack contentStack = containerInv.getStackInSlot(i);
-			if (contentStack != null && contentStack.getItem() instanceof IFood)
-			{
-				if (Food.getDecay(contentStack) / Global.FOOD_MAX_WEIGHT > 0.9f)
-					containerInv.setInventorySlotContents(i, null);
-			}
+			// if (contentStack != null && contentStack.getItem() instanceof IFood)
+			// {
+			// 	if (Food.getDecay(contentStack) / Global.FOOD_MAX_WEIGHT > 0.9f)
+			// 		containerInv.setInventorySlotContents(i, null);
+			// }
+			// Disabled
 			if (contentStack != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();

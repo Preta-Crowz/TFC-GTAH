@@ -126,8 +126,8 @@ public class Global
 	/**
 	 * Switch to TFCOptions.foodDecayRate
 	 */
-	@Deprecated
-	public static double foodDecayRate = TFCOptions.foodDecayRate;
+	// @Deprecated
+	// public static double foodDecayRate = TFCOptions.foodDecayRate;
 
 	public static final float FOOD_MAX_WEIGHT = 160;
 	public static final float FOOD_MIN_DROP_WEIGHT = 0.1f;

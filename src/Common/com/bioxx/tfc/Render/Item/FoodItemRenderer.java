@@ -38,7 +38,7 @@ public class FoodItemRenderer implements IItemRenderer
 		if(is.getItem() instanceof IFood && is.hasTagCompound())
 		{			
 			renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
-			float decayPerc = Math.max(Food.getDecay(is) / Food.getWeight(is), 0);
+			// float decayPerc = Math.max(Food.getDecay(is) / Food.getWeight(is), 0);
 			float cookPerc = Math.max(Math.min(Food.getCooked(is)/600f, 1), 0);
 			if(is.getItem() instanceof ItemFoodTFC)
 			{
@@ -50,7 +50,7 @@ public class FoodItemRenderer implements IItemRenderer
 					renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
 			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			float decayTop = decayPerc * 13.0F;
+			// float decayTop = decayPerc * 13.0F;
 
 			if(type == ItemRenderType.INVENTORY)
 			{
@@ -81,16 +81,16 @@ public class FoodItemRenderer implements IItemRenderer
 
 				if (weightPerc <= 1) // Only draw bars if the weight is within the max weight. Food created using the blank createTag (weight = 999) will not have the bars.
 				{
-					if (((IFood) is.getItem()).renderDecay())
-					{
-						if (decayPerc < 0.10)
-						{
-							decayTop = decayTop * 10;
-							renderQuad(1, 13, 13 - decayTop, 1, 0x00ff00);
-						}
-						else
-							renderQuad(1, 13, 13 - decayTop, 1, 0xff0000);
-					}
+					// if (((IFood) is.getItem()).renderDecay())
+					// {
+					// 	if (decayPerc < 0.10)
+					// 	{
+					// 		decayTop = decayTop * 10;
+					// 		renderQuad(1, 13, 13 - decayTop, 1, 0x00ff00);
+					// 	}
+					// 	else
+					// 		renderQuad(1, 13, 13 - decayTop, 1, 0xff0000);
+					// }
 					if (((IFood) is.getItem()).renderWeight())
 					{
 						renderQuad(1, 14, 13, 1, 0);

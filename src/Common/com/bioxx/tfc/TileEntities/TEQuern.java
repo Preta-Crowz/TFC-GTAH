@@ -112,8 +112,8 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 				{
 					storage[1] = qr.getResult().copy();
 					float flourWeight = Food.getWeight(storage[0]);
-					float flourDecay = Food.getDecay(storage[0]);
-					ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
+					// float flourDecay = Food.getDecay(storage[0]);
+					ItemFoodTFC.createTag(storage[1], flourWeight);
 					storage[0] = null;
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					return true;

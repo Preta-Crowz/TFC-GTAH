@@ -70,8 +70,8 @@ public class ItemMeal extends ItemTerra implements IFood
 			is.setTagCompound(new NBTTagCompound());
 
 		Food.setWeight(is, 0);
-		Food.setDecay(is, 0);
-		Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() + 1);
+		// Food.setDecay(is, 0);
+		// Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() + 1);
 		return is;
 	}
 
@@ -114,14 +114,14 @@ public class ItemMeal extends ItemTerra implements IFood
 		float ounces = Helper.roundNumber(Food.getWeight(is), 100);
 		if (ounces > 0)
 			arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
-		float decay = Food.getDecay(is);
-		if (decay > 0)
-			arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
-		if (TFCOptions.enableDebugMode)
-		{
-			arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + ": " + decay);
-			arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + this.getDecayRate(is));
-		}
+		// float decay = Food.getDecay(is);
+		// if (decay > 0)
+		// 	arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
+		// if (TFCOptions.enableDebugMode)
+		// {
+		// 	arraylist.add(EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.food.decay") + ": " + decay);
+		// 	arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay Rate: " + this.getDecayRate(is));
+		// }
 
 		if (TFC_Core.showCtrlInformation())
 			ItemFoodTFC.addTasteInformation(is, player, arraylist);
@@ -201,8 +201,8 @@ public class ItemMeal extends ItemTerra implements IFood
 			if (is.hasTagCompound())
 			{
 				float weight = Food.getWeight(is);
-				float decay = Math.max(Food.getDecay(is), 0);
-				float eatAmount = getEatAmount(foodstats, weight - decay);
+				// float decay = Math.max(Food.getDecay(is), 0);
+				float eatAmount = getEatAmount(foodstats, weight);
 				float tasteFactor = foodstats.getTasteFactor(is);
 
 				int[] fg = Food.getFoodGroups(is);
@@ -309,17 +309,17 @@ public class ItemMeal extends ItemTerra implements IFood
 		return 0;
 	}
 
-	@Override
-	public float getDecayRate(ItemStack is)
-	{
-		return Food.getDecayRate(is);
-	}
+	// @Override
+	// public float getDecayRate(ItemStack is)
+	// {
+	// 	return Food.getDecayRate(is);
+	// }
 
-	@Override
-	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k)
-	{
-		return null;
-	}
+	// @Override
+	// public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k)
+	// {
+	// 	return null;
+	// }
 
 	@Override
 	public boolean isEdible(ItemStack is)
@@ -378,10 +378,10 @@ public class ItemMeal extends ItemTerra implements IFood
 		return 20;
 	}
 
-	@Override
-	public boolean renderDecay() {
-		return true;
-	}
+	// @Override
+	// public boolean renderDecay() {
+	// 	return false;
+	// }
 
 	@Override
 	public boolean renderWeight() {

@@ -52,20 +52,20 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		float ounces = Food.getWeight(is);
 		if (ounces > 0)
 			arraylist.add(ounces + " oz");
-		float decay = Food.getDecay(is);
-		if (decay > 0)
-		{
-			float perc = decay / ounces;
-			String s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.fresh");
-			if (perc > 50)
-				s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.old");
-			if (perc > 70)
-				s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.sour");
+		// float decay = Food.getDecay(is);
+		// if (decay > 0)
+		// {
+		// 	float perc = decay / ounces;
+		// 	String s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.fresh");
+		// 	if (perc > 50)
+		// 		s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.old");
+		// 	if (perc > 70)
+		// 		s = EnumChatFormatting.DARK_GRAY + TFC_Core.translate("gui.milk.sour");
 
-			arraylist.add(s);
-		}
-		if (TFCOptions.enableDebugMode)
-			arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
+		// 	arraylist.add(s);
+		// }
+		// if (TFCOptions.enableDebugMode)
+		// 	arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
 	}
 
 	public static ItemStack createTag(ItemStack is, float weight)
@@ -74,8 +74,8 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 			is.setTagCompound(new NBTTagCompound());
 
 		Food.setWeight(is, weight);
-		Food.setDecay(is, 0);
-		Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() + 1);
+		// Food.setDecay(is, 0);
+		// Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() + 1);
 		return is;
 	}
 
@@ -154,17 +154,17 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		return -1;
 	}
 
-	@Override
-	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
-	{
-		return new ItemStack(TFCItems.woodenBucketEmpty);
-	}
+	// @Override
+	// public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
+	// {
+	// 	return new ItemStack(TFCItems.woodenBucketEmpty);
+	// }
 
-	@Override
-	public float getDecayRate(ItemStack is)
-	{
-		return 6f;
-	}
+	// @Override
+	// public float getDecayRate(ItemStack is)
+	// {
+	// 	return 6f;
+	// }
 
 	@Override
 	public EnumItemReach getReach(ItemStack is)
@@ -215,11 +215,11 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		return 80;
 	}
 
-	@Override
-	public boolean renderDecay() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+	// @Override
+	// public boolean renderDecay() {
+	// 	// TODO Auto-generated method stub
+	// 	return false;
+	// }
 
 	@Override
 	public boolean renderWeight() {

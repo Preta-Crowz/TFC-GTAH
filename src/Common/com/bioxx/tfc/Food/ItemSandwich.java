@@ -62,10 +62,10 @@ public class ItemSandwich extends ItemMeal
 		return 10;
 	}
 
-	@Override
-	public boolean renderDecay() {
-		return true;
-	}
+	// @Override
+	// public boolean renderDecay() {
+	// 	return false;
+	// }
 
 	@Override
 	public boolean renderWeight() {
