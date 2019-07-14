@@ -197,7 +197,7 @@ public class RenderOverlayHandler
 			//Draw Food and Water
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 			//float foodLevel = foodstats.getFoodLevel();
-			float foodLevel = player.getFoodStats().getFoodLevel()
+			float foodLevel = player.getFoodStats().getFoodLevel();
 			//float preFoodLevel = foodstats.getPrevFoodLevel();
 
 			float waterLevel = foodstats.waterLevel;
