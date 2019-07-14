@@ -196,19 +196,22 @@ public class RenderOverlayHandler
 
 			//Draw Food and Water
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-			float foodLevel = foodstats.getFoodLevel();
+			//float foodLevel = foodstats.getFoodLevel();
+			float foodLevel = player.getFoodStats().getFoodLevel()
 			//float preFoodLevel = foodstats.getPrevFoodLevel();
 
 			float waterLevel = foodstats.waterLevel;
 
-			float percentFood = Math.min(foodLevel / foodstats.getMaxStomach(player), 1);
+			//float percentFood = Math.min(foodLevel / foodstats.getMaxStomach(player), 1);
+			float percentFood = Math.min(foodLevel / 20, 1);
 			float percentWater = Math.min(waterLevel / foodstats.getMaxWater(player), 1);
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 20, 90, 5);
 			if (playerInfo != null && playerInfo.guishowFoodRestoreAmount)
 			{
-				float percentFood2 = Math.min(percentFood + playerInfo.guiFoodRestoreAmount / foodstats.getMaxStomach(player), 1);
+				//float percentFood2 = Math.min(percentFood + playerInfo.guiFoodRestoreAmount / foodstats.getMaxStomach(player), 1);
+				float percentFood2 = Math.min(percentFood + playerInfo.guiFoodRestoreAmount / 20, 1);
 				GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);
 				this.drawTexturedModalRect(mid+1, healthRowHeight, 0, 25, (int) (90*(percentFood2)), 5);
 			}
