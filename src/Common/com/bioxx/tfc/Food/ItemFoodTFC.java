@@ -8,11 +8,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.FoodStats;
 import net.minecraft.world.World;
 
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -53,6 +55,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	private EnumFoodGroup foodgroup;
 
+	public int itemUseDuration = 32;
+	private int healAmount;
+	private float saturationModifier;
+	private boolean isWolfsFavoriteMeat;
+    private boolean alwaysEdible;
+
 	public int foodID;
 	// public float decayRate = 1.0f;
 	public boolean edible = true;
@@ -68,14 +76,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public IIcon cookedIcon;
 	protected boolean hasCookedIcon;
 
-	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
-	{
-		super();
+
+    public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
+    {
+    	super();
 		this.setCreativeTab(TFCTabs.TFC_FOODS);
 		this.setFolder("food/");
 		foodgroup = fg;
-		TFCItems.foodList.add(this);
-		this.setMaxDamage(100);
+        this.setCreativeTab(TFCTabs.TFC_FOODS);
+		this.setFolder("food/");
 		this.hasSubtypes = false;
 		smokeAbsorb = 0.5f;
 		tasteSweet = sw;
@@ -83,8 +92,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		tasteSalty = sa;
 		tasteBitter = bi;
 		tasteUmami = um;
+		TFCItems.foodList.add(this);
 		foodID = FoodRegistry.getInstance().registerFood(fg, this);
-	}
+    }
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible)
 	{
@@ -96,7 +106,24 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	{
 		this(fg, sw, so, sa, bi, um, edible);
 		canBeUsedRaw = usable;
+        this.healAmount = 2;
+        this.isWolfsFavoriteMeat = false;
+        this.saturationModifier = 0.6f;
 	}
+
+	// public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible, boolean usable, int healAmount, float satModif, boolean wolfFav)
+	// {
+	// 	this(fg, sw, so, sa, bi, um, edible, usable);
+
+ //        this.healAmount = healAmount;
+ //        this.isWolfsFavoriteMeat = wolfFav;
+ //        this.saturationModifier = satModif;
+ //    }
+
+ //    public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible, boolean usable, int healAmount, boolean wolfFav)
+ //    {
+ //    	this(fg, sw, so, sa, bi, um, edible, usable, healAmount, 0.6f, wolfFav);
+ //    }
 
 	// public ItemFoodTFC setDecayRate(float f)
 	// {
@@ -189,11 +216,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	// 	return decayRate * (TFC_Time.getYearRatio(96)) * mult;
 	// }
 
-	@Override
-	public void getSubItems(Item item, CreativeTabs tabs, List list)
-	{
-		list.add(ItemFoodTFC.createTag(new ItemStack(this, 1), Global.FOOD_MAX_WEIGHT));
-	}
+	// @Override
+	// public void getSubItems(Item item, CreativeTabs tabs, List list)
+	// {
+	// 	list.add(ItemFoodTFC.createTag(new ItemStack(this, 1), Global.FOOD_MAX_WEIGHT));
+	// }
 
 	@Override
 	public String getItemStackDisplayName(ItemStack is)
@@ -265,6 +292,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		}
 		else
 		{
+			is.setTagCompound(new NBTTagCompound());
 			arraylist.add(TFC_Core.translate("gui.badnbt"));
 			TerraFirmaCraft.LOG.error(TFC_Core.translate("error.error") + " " + is.getUnlocalizedName() + " " +
 					TFC_Core.translate("error.NBT") + " " + TFC_Core.translate("error.Contact"));
@@ -273,9 +301,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	public void addFoodInformation(ItemStack is, EntityPlayer player, List<String> arraylist)
 	{
-		float ounces = Helper.roundNumber(Food.getWeight(is), 100);
-		if (ounces > 0 && ounces <= Global.FOOD_MAX_WEIGHT)
-			arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
+		// float ounces = Helper.roundNumber(Food.getWeight(is), 100);
+		// if (ounces > 0 && ounces <= Global.FOOD_MAX_WEIGHT)
+		// 	arraylist.add(TFC_Core.translate("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 
 		// float decay = Food.getDecay(is);
 		// if (decay > 0)
@@ -431,35 +459,48 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		if (foodstats.needFood() && this.isEdible(is))
+		FoodStats vstats = player.getFoodStats();
+		// FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+		if (vstats.needFood() && this.isEdible(is))
 			player.setItemInUse(is, 32);
 
 		return is;
 	}
 
+	public int getHealAmount(ItemStack is)
+    {
+        return this.healAmount;
+    }
+
+    public float getSatAmount(ItemStack is)
+    {
+        return this.saturationModifier;
+    }
+
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
+		FoodStats vstats = player.getFoodStats();
+		vstats.addStats(2, 0.6f);
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote && this.isEdible(is))
 		{
 			if(is.hasTagCompound())
 			{
 				NBTTagCompound nbt = is.getTagCompound();
-				float weight = Food.getWeight(is);
+				// float weight = Food.getWeight(is);
 				// float decay = Math.max(Food.getDecay(is), 0);
 
-				float eatAmount = Math.min(weight, 5f);
-				float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
-				if(stomachDiff > 0)
-					eatAmount-=stomachDiff;
+				// float eatAmount = Math.min(weight, 5f);
+				// float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
+				// if(stomachDiff > 0)
+				// 	eatAmount-=stomachDiff;
 
-				float tasteFactor = foodstats.getTasteFactor(is);
-				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
-				foodstats.stomachLevel += eatAmount*tasteFactor;
-				if(FoodStatsTFC.reduceFood(is, eatAmount))
-					is.stackSize = 0;
+				// float tasteFactor = foodstats.getTasteFactor(is);
+				// foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
+				// foodstats.stomachLevel += eatAmount*tasteFactor;
+				// if(FoodStatsTFC.reduceFood(is, eatAmount))
+				is.stackSize--;
 			}
 			else
 			{
@@ -483,11 +524,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		{
 			if(!world.isRemote)
 			{
-				float weight = Food.getWeight(is);
+				// float weight = Food.getWeight(is);
 				// float decay = Math.max(Food.getDecay(is), 0);
-				float eatAmount = Math.min(weight, 5f);
-				if(FoodStatsTFC.reduceFood(is, eatAmount))
-					is.stackSize = 0;
+				// float eatAmount = Math.min(weight, 5f);
+				// if(FoodStatsTFC.reduceFood(is, eatAmount))
+				is.stackSize--;
 			}
 			world.playSoundAtEntity(entity, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		}
@@ -509,7 +550,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if (!is.hasTagCompound())
 			is.setTagCompound(new NBTTagCompound());
 
-		Food.setWeight(is, weight);
+		// Food.setWeight(is, weight);
 		// Food.setDecay(is, -24);
 		// Food.setDecayTimer(is, (int) TFC_Time.getTotalHours() + 1);
 
@@ -564,27 +605,27 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public EnumSize getSize(ItemStack is)
 	{
-		float weight = Food.getWeight(is);
-		if(weight <= 20)
-			return EnumSize.TINY;
-		else if(weight <= 40)
-			return EnumSize.VERYSMALL;
-		else if(weight <= 80)
-			return EnumSize.SMALL;
-		else
+		// float weight = Food.getWeight(is);
+		// if(weight <= 20)
+		// 	return EnumSize.TINY;
+		// else if(weight <= 40)
+		// 	return EnumSize.VERYSMALL;
+		// else if(weight <= 80)
+		// 	return EnumSize.SMALL;
+		// else
 			return EnumSize.MEDIUM;
 	}
 
 	@Override
 	public EnumWeight getWeight(ItemStack is)
 	{
-		float weight = Food.getWeight(is);
-		if(weight < 80)
+		// float weight = Food.getWeight(is);
+		// if(weight < 80)
 			return EnumWeight.LIGHT;
-		else if(weight < 160)
-			return EnumWeight.MEDIUM;
-		else
-			return EnumWeight.HEAVY;
+		// else if(weight < 160)
+		// 	return EnumWeight.MEDIUM;
+		// else
+		// 	return EnumWeight.HEAVY;
 	}
 	@Override
 	public boolean canStack()
@@ -698,7 +739,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	@Override
 	public float getFoodMaxWeight(ItemStack is) {
-		return 160;
+		return 0;
 	}
 
 	// @Override
@@ -708,7 +749,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 
 	@Override
 	public boolean renderWeight() {
-		return true;
+		return false;
 	}
 
 	@Override
