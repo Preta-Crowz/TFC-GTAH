@@ -88,7 +88,7 @@ public class ItemHammer extends ItemTerraTool implements ICausesDamage
 
 	public double getWeaponDamage(ItemStack is)
 	{
-		return Math.floor(damageVsEntity + (damageVsEntity * AnvilManager.getDamageBuff(is)));
+		return Math.floor((damageVsEntity + (damageVsEntity * AnvilManager.getDamageBuff(is)))/5);
 	}
 
 	@Override

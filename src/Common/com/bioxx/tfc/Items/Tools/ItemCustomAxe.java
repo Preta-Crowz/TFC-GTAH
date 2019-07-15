@@ -112,7 +112,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 
 	public double getWeaponDamage(ItemStack is)
 	{
-		return Math.floor(toolDamage + (toolDamage * AnvilManager.getDamageBuff(is)));
+		return Math.floor((toolDamage + (toolDamage * AnvilManager.getDamageBuff(is)))/5);
 	}
 
 	@Override

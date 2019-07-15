@@ -630,7 +630,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public boolean canStack()
 	{
-		return false;
+		return true;
 	}
 
 	@Override

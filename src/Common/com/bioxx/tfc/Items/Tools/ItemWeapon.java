@@ -140,7 +140,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 
 	public double getWeaponDamage(ItemStack is)
 	{
-		return Math.floor(weaponBaseDamage + (weaponBaseDamage * AnvilManager.getDamageBuff(is)));
+		return Math.floor((weaponBaseDamage + (weaponBaseDamage * AnvilManager.getDamageBuff(is)))/5);
 	}
 
 	@Override

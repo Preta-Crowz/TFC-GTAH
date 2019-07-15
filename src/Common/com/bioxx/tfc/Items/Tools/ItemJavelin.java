@@ -234,7 +234,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 
 	public double getWeaponDamage(ItemStack is)
 	{
-		return Math.floor(weaponDamage + (weaponDamage * AnvilManager.getDamageBuff(is)));
+		return Math.floor((weaponDamage + (weaponDamage * AnvilManager.getDamageBuff(is)))/5);
 	}
 
 	@Override
